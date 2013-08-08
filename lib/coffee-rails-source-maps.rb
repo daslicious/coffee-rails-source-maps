@@ -41,7 +41,10 @@ if Rails.env.development?
           options[:sourceFiles] = ["/#{coffee_file.relative_path_from(Rails.root.join("public"))}"] # specify coffee source file explicitly (see http://coffeescript.org/documentation/docs/sourcemap.html#section-8)
           ret = Source.context.call("CoffeeScript.compile", script, options)
 
-          coffee_file.open('w') {|f| f.puts script }
+          warning = "################### BAD BAD BAD BAD BAD ########## BADBAD BAD!!!!!!
+          ######BAD !!!!! NO NO!!! NOT THE FILE YOU ARE LOOKING FOR!!!!
+          "
+          coffee_file.open('w') {|f| f.puts script f.puts warning}
           map_file.open('w')    {|f| f.puts ret["v3SourceMap"]}
 
           comment = "//# sourceMappingURL=/#{map_file.relative_path_from(Rails.root.join("public"))}\n"
